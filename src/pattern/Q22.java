@@ -1,2 +1,28 @@
-package pattern;public class Q22 {
+package pattern;
+
+public class Q22 {
+    public static void main(String[] args) {
+        int n = 4;
+
+        for (int i = 0; i < 2 * n - 1; i++) {
+            for (int j = 0; j < 2 * n - 1; j++) {
+                // Calculate distance from top
+                int top = i;
+                // Calculate distance from left
+                int left = j;
+                // Calculate distance from bottom
+                int bottom = (2 * n - 2) - i;
+                // Calculate distance from right
+                int right = (2 * n - 2) - j;
+
+                // Take the minimum of all four distances
+                int minDist = Math.min(Math.min(top, bottom), Math.min(left, right));
+
+                // Print number (starts with n at border, decreases inside)
+                System.out.print((n - minDist) + " ");
+            }
+            System.out.println();
+        }
+
+    }
 }
