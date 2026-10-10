@@ -7,25 +7,68 @@ public class Basics {
 //        boolean ans = checkSubarraySum(nums, 6);
 //        long ans = factorial(5);
 //        System.out.println(ans);
-        System.out.println(arraySum(nums));
+//        System.out.println(arraySum(nums));
+//        char[] str = {'h','e','l','l','o'};
+//        revStr(str);
+//        System.out.println(str);
+//        System.out.println(isPrime(2229));
+        System.out.println(fb(6));
     }
-
+//    Q1
     public static int numSum(int n) {
         if(n == 0) return 0;
         return n + numSum(n - 1);
     }
 
+//    Q2
     public static long factorial(int n) {
         if (n == 0 || n == 1) return 1;
         return (long) n * factorial(n - 1);
     }
 
+//    Q3
     public static int arraySum(int[] arr) {
         return addFrom(arr, 0);
     }
-
     public static int addFrom(int[] arr, int ind) {
         if(ind == arr.length) return 0;
         return arr[ind] + addFrom(arr, ind + 1);
     }
+
+//    Q4
+    public static void revStr(char[] str) {
+        revHelper(str, 0, str.length - 1);
+    }
+    public static void revHelper(char[] str, int l, int r) {
+        // base condition
+        if(l >= r) return;
+        // the tasks
+        char temp = str[l];
+        str[l] = str[r];
+        str[r] = temp;
+        // recursive call
+        revHelper(str, ++l, --r);
+    }
+
+//    Q5
+    public static boolean isPrime(int num) {
+        return (divCnt(num,1) == 2);
+    }
+    public static int divCnt(int num, int i) {
+//      Base case
+        if (i > num) return 0;
+//      Task
+        if(num % i == 0) {
+            return 1 + divCnt(num, i + 1);
+        }
+//      Recursive call
+        return divCnt(num, i + 1);
+    }
+
+//    Q6
+    public static int fb(int n) {
+        if(n < 2) return n;
+        return fb(n - 1) + fb(n - 2);
+    }
+
 }
