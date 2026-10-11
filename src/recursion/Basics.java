@@ -3,8 +3,6 @@ package recursion;
 public class Basics {
     public static void main(String[] args) {
         int[] nums = {2,4,6,7};
-//        int ans = pivotIndex(nums);
-//        boolean ans = checkSubarraySum(nums, 6);
 //        long ans = factorial(5);
 //        System.out.println(ans);
 //        System.out.println(arraySum(nums));
@@ -12,7 +10,8 @@ public class Basics {
 //        revStr(str);
 //        System.out.println(str);
 //        System.out.println(isPrime(2229));
-        System.out.println(fb(6));
+//        System.out.println(fb(6));
+        System.out.println(pow(2.00, 3));
     }
 //    Q1
     public static int numSum(int n) {
@@ -71,4 +70,17 @@ public class Basics {
         return fb(n - 1) + fb(n - 2);
     }
 
+//    Q7 x^n
+    public static double pow(double x, int n) {
+    long longN = Math.abs((long) n);
+    double ans = powHelper(x, longN);
+    return n < 0 ? 1 / ans : ans;
+    }
+    public static double powHelper(double x, long n) {
+        if(n == 0) return 1;
+        double half = powHelper(x, n / 2);
+        if (n % 2 == 0) {
+            return half * half;
+        } else return x * (half * half);
+    }
 }
