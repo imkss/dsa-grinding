@@ -31,17 +31,17 @@ public class Learn {
     }
 
 //    The whole logic for creating all possible combination is :: either pick an element or ignore it
-//    in backtrack method we pass two parameter 1.processed 2.unprocessed
+//    in helper method we pass two parameter 1.processed 2.unprocessed
     public static void subSeqString(String str) {
-        subsetStringBacktrack("", str);
+        helper("", str);
     }
-    public static void subsetStringBacktrack(String processed, String unprocessed) {
+    public static void helper(String processed, String unprocessed) {
         if (unprocessed.isEmpty()) {
             System.out.println(processed);
             return;
         }
         char ch = unprocessed.charAt(0);
-        subsetStringBacktrack(processed + ch, unprocessed.substring(1));
-        subsetStringBacktrack(processed, unprocessed.substring(1));
+        helper(processed + ch, unprocessed.substring(1));
+        helper(processed, unprocessed.substring(1));
     }
 }
