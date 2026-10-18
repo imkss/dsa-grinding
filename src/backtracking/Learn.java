@@ -7,9 +7,13 @@ public class Learn {
     public static void main(String[] args) {
 //        List<String> output = generateParenthesis(3);
 //        System.out.println(output);
-        subSeqString("abc");
+//        subSeqString("abc");
 //        String s = "sunny";
 //        System.out.println(s.substring(1));
+        int[] nums = {1,2,3};
+        List<List<Integer>> ans = new ArrayList<>();
+        ans = subsets(nums);
+        System.out.println(ans);
     }
 
     public static List<String> generateParenthesis(int n) {
@@ -43,5 +47,27 @@ public class Learn {
         char ch = unprocessed.charAt(0);
         helper(processed + ch, unprocessed.substring(1));
         helper(processed, unprocessed.substring(1));
+    }
+
+
+    public static List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        backtrack(0, nums, new ArrayList<>(), result);
+        return result;
+    }
+
+    private static void backtrack(int i, int[] nums, List<Integer> current, List<List<Integer>> result) {
+        // Base case: if we've considered all elements, add a copy of the current subset
+        if (i == nums.length) {
+            result.add(new ArrayList<>(current));
+            return;
+        }
+        // Choice 1: Include nums[i]
+        current.add(nums[i]);
+        backtrack(i + 1, nums, current, result);
+        // Backtrack (undo the choice)
+        current.remove(current.size() - 1);
+        // Choice 2: Exclude nums[i]
+        backtrack(i + 1, nums, current, result);
     }
 }
