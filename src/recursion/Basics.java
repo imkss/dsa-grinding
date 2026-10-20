@@ -11,7 +11,10 @@ public class Basics {
 //        System.out.println(str);
 //        System.out.println(isPrime(2229));
 //        System.out.println(fb(6));
-        System.out.println(pow(2.00, 3));
+//        System.out.println(pow(2.00, 3));
+//        System.out.println(maze(3, 3));
+        mazePath("", 3, 3);
+
     }
 //    Q1
     public static int numSum(int n) {
@@ -82,5 +85,27 @@ public class Basics {
         if (n % 2 == 0) {
             return half * half;
         } else return x * (half * half);
+    }
+
+//    Q8 maze escape problem
+    public static int maze(int r, int c) {
+        if (r == 1 || c == 1) return 1;
+        int down = maze(r - 1, c);
+        int right = maze(r, c - 1);
+        return down + right;
+    }
+
+//    Q8.1 print path
+    public static void mazePath(String p, int r, int c) {
+        if (r == 1 && c == 1 ) {
+            System.out.println(p);
+            return;
+        }
+        if(r > 1) {
+            mazePath(p + 'R', r - 1, c);
+        }
+        if(c > 1) {
+            mazePath(p + 'D', r, c - 1);
+        }
     }
 }
