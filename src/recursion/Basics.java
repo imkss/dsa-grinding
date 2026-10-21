@@ -1,5 +1,8 @@
 package recursion;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Basics {
     public static void main(String[] args) {
         int[] nums = {2,4,6,7};
@@ -13,8 +16,14 @@ public class Basics {
 //        System.out.println(fb(6));
 //        System.out.println(pow(2.00, 3));
 //        System.out.println(maze(3, 3));
-        mazePath("", 3, 3);
-
+//        mazePath("", 3, 3);
+//        System.out.println(mazePathDiagonal("", 3,3 ));
+        boolean[][] mazeBox = {
+                {true, true, true},
+                {true, false, true},
+                {true, true, true},
+        };
+        mazeWithObstacle("", mazeBox, 0, 0);
     }
 //    Q1
     public static int numSum(int n) {
@@ -106,6 +115,43 @@ public class Basics {
         }
         if(c > 1) {
             mazePath(p + 'D', r, c - 1);
+        }
+    }
+
+    //    Q8.2 diagonal travel included
+    public static List<String> mazePathDiagonal(String p, int r, int c) {
+        List<String> ans = new ArrayList<>();
+        if (r == 1 && c == 1 ) {
+            ans.add(p);
+            return ans;
+        }
+        if(r > 1) {
+            ans.addAll(mazePathDiagonal(p + 'R', r - 1, c));
+        }
+        if(c > 1) {
+            ans.addAll(mazePathDiagonal(p + 'D', r, c - 1));
+        }
+        if(r > 1 && c > 1) {
+            ans.addAll(mazePathDiagonal(p + "Dia", r - 1, c - 1));
+        }
+        return ans;
+    }
+    //    Q8.3 maze with obstacle
+    public static void mazeWithObstacle(String p, boolean[][] maze, int r, int c) {
+        if (r == maze.length - 1 && c == maze[0].length - 1) {
+            System.out.println(p);
+            return;
+        }
+        if (!maze[r][c]) return;
+
+        if(r < maze.length - 1) {
+            mazeWithObstacle(p + 'R', maze, r + 1, c);
+        }
+        if(c < maze[0].length - 1) {
+            mazeWithObstacle(p + 'D', maze, r, c + 1);
+        }
+        if(r < maze.length - 1 && c < maze[0].length - 1) {
+            mazeWithObstacle(p + "Dia", maze, r + 1, c + 1);
         }
     }
 }
